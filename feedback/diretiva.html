@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diretiva Vue</title>
+</head>
+<body>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+
+
+    <div id="app">
+
+        <input type="text" v-model="textoDigitado" />
+        <br/>
+        <div v-if=" textoDigitado == 1 || textoDigitado == 5">
+            <img v-bind:src="srcImg" v-bind:title="titleImg" width="100px"/>
+        </div>
+        <div v-else-if="textoDigitado == 2">
+            <img v-bind:src="srcImg2" v-bind:title="titleImg" width="100px" />
+        </div>
+        <div v-else>
+            <img v-bind:src="srcImg3" v-bind:title="titleImg" width="100px"/>
+        </div>
+        <a v-bind:href="url">link Vue</a>
+        <br/>
+        <p v-text="textPar"></p>
+        <br>
+        <p v-html="textPar"></p>
+    </div>
+
+    <script>
+
+        new Vue({
+            el: '#app',
+            data: {
+                textoDigitado: '',
+                srcImg: 'logo-vue.png',
+                srcImg2: 'logo-vue2.png',
+                srcImg3: 'logo-vue3.jpeg',
+                titleImg: 'logo Vue',
+                url: 'http://vuejs.org',
+                textPar: '<b>texto</b> <br> do <br> vue'
+
+            }
+        })
+
+    </script>
+    
+</body>
+</html>

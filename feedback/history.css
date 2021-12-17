@@ -1,0 +1,140 @@
+body{
+    font-family: sans-serif;
+    margin-left: 25%;
+    padding: 50px;
+    border: 1px solid gray;
+    border-radius: 3px;
+   
+}
+
+.info-bold span:first-child{
+    font-weight: bold;
+}
+.stars div{
+    width: 15px;
+    height: 15px;
+    float: left;
+    
+}
+.stars-user span{
+    width: 15px;
+    height: 15px;
+    float: left;
+
+}
+.current-feedback span{
+    float: left;
+    
+}
+.message-comment{
+    border: 1px solid rgb(199, 199, 199);
+    background-color: rgb(211, 211, 211);
+    border-radius: 3px;
+    margin-top: 5px;
+    padding: 8px;
+    font-size: 14px;
+    height: 18px;
+    width: 300px;
+}
+
+#container-msg{
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+.clearfix{
+    clear:both
+}
+.pull-left{
+    float: left;
+}
+.status{
+    margin-left: 80px;
+}
+.user-status{
+    margin-left:15px;
+  
+}
+#select-status{
+    width: 285px;
+    display: block;
+}
+
+.user-img{
+    width: 50px;
+    height: 50px;
+    border-radius: 18px;
+    background-size: cover;
+    margin-right: 5px;
+ 
+}
+/*.user-img{
+    background-image: url(	https://hml.beedoo.io/assets/img/user_pic.jpg);
+}*/
+.send-message{
+    margin-right: 40px;
+    
+}
+.send-message div:first-child{
+    font-weight: bold;
+}
+.send-message div:last-child{
+    border: 1px solid gray;
+    border-radius: 3px;
+    padding: 5px;
+    font-size: 12px;
+    height: 80px;
+    width: 200px;
+   
+}
+.info-user{
+    margin-bottom: 30px;
+}
+.info-messages{
+    margin-left: 20px;
+}
+.opinion{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.comment{
+    border: 1px solid rgb(199, 199, 199);
+    background-color: rgb(211, 211, 211);
+    border-radius: 3px;
+    padding: 8px;
+    font-size: 14px;
+    height: 17px;
+    width: 448px;
+}
+.hide{ 
+    display:none;
+   }
+   .orange{
+       color: orange
+   }
+   .gray{
+      color:rgb(116, 116, 116)
+   }
+   .message{
+       float:left;
+       margin-left: 45px;
+       margin-bottom: 50px;
+      
+   }
+   .message textarea{
+    display: block;
+    height: 95px;
+   }
+   .btn-save{
+       background-color: rgb(48, 172, 48);
+       padding: 6px 12px;
+       border-radius: 7px;
+       color:white;
+       margin-bottom: 30px;
+       float: right;
+       margin-right: 262px
+   }
+   .red{
+       background-color: red;
+       color: white;
+   }

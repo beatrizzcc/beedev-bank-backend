@@ -1,0 +1,19 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "backend beedev bia",
+  "main": "src/index.js",
+  "scripts": {
+    "start-dev": "nodemon src/*",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Bia",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "knex": "^0.95.11",
+    "mysql2": "^2.3.0"
+  },
+  "devDependencies": {}
+}
