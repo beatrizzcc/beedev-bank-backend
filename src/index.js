@@ -11,10 +11,11 @@ app.use(express.json())
 import knex from 'knex';
 import response from 'express';
 //const { CreateAgencyController } = require('./controllers/CreateAgencyController');
-import CreateAgencyController from './controllers/CreateAgencyController.js'
+//import CreateAgencyController from './controllers/CreateAgencyController.js'
 //const { CreateCustomerController } = require('./controllers/CreateCustomerController');
 import CreateCustomerController from './controllers/CreateCustomerController.js'
-import {RequestError} from './utils/RequestError.js';
+
+import { CreateAgencyControllerFactory } from './controllers/CreateAgencyController.factory.js';
 const connection = knex({
     client: 'mysql2',
     version: '5.7',
@@ -35,70 +36,16 @@ app.get('/', function (req, res) {
 })
 
 app.post('/api/agency', async (req, res) =>  {
-    console.log(req.body)
-    const createAgcCtrl = new CreateAgencyController()
-
-    let result = {
-        status: true,
-        id: null, 
-        error: false
-    }
-
-    try{
-        validateAgency(req.body)
-        const ctrlResult = await createAgcCtrl.create(
-            req.body.number,
-            req.body.address
-        )
-            result.id = ctrlResult[0]
-            res.statusCode = 200
-    }catch(e){
-        console.log('deu erro')
-        console.log(e)
-
-        if
-        (e.name === 'RequestError'){
-            res.statusCode = 400
-            result.error = e.message
-        }else{
-            res.statusCode = 500
-
-        }
-        result.status = false
-
-    }
-    
+    const result = await CreateAgencyControllerFactory(req)
+   
+    res.statusCode = result.statusCode
    
     res.json(result)
 
     
 })
 
-function validateAgency(reqBody){
 
-    let error = false
-    if(reqBody.number.indexOf('?') >= 0){
-        //res.statusCode = 400
-        //throw new Error('Invalid agency number')
-        //throw new RequestError('Invalid Agency Number')
-        error = 'Invalid Agency Number'
-    }
-    if(reqBody.number.indexOf(' ') >= 0){
-        //throw new Error('Blank space invalid')
-        //throw new RequestError('Blank Space Invalid')
-        error = 'Blank Space Invalid'
-    }
-    if(reqBody.number.length >= 8){
-        //throw new Error('Several characters invalid')
-       // throw new RequestError('Several Characters Invalid')
-       error = 'Several Characters Invalid'
-    }
-
-    if(error){
-        throw new RequestError(error)
-    }
-
-}
 
 
 //teste
