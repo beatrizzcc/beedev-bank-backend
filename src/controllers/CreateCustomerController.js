@@ -1,6 +1,6 @@
-const { CustomersModel } = require("./models/CustomersModel")
+import CustomersModel from "./models/CustomersModel.js"
 
-class CreateCustomerController {
+export default class CreateCustomerController {
     create(name, account){
         const model = new CustomersModel()
         model.create({
@@ -16,6 +16,3 @@ class CreateCustomerController {
 
 }
 
-module.exports = {
-    CreateCustomerController
-}

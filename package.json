@@ -4,7 +4,7 @@
   "description": "backend beedev bia",
   "main": "src/index.js",
   "scripts": {
-    "start-dev": "nodemon src/*",
+    "start-dev": "nodemon --experimental-modules index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Bia",
@@ -15,5 +15,6 @@
     "knex": "^0.95.11",
     "mysql2": "^2.3.0"
   },
-  "devDependencies": {}
+  "devDependencies": {},
+  "type": "module"
 }

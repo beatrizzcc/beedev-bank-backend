@@ -1,7 +1,8 @@
-const knex = require('knex');
+//const knex = require('knex');
+import knex from 'knex'
 
 
-class BaseModel {
+export default class BaseModel {
 
     constructor(){
         this.database = knex({
@@ -30,8 +31,4 @@ class BaseModel {
   
       }
 
-}
-
-module.exports = {
-    BaseModel
 }

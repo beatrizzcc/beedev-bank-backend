@@ -1,7 +1,7 @@
-const { AgencyModel } = require("./models/AgencyModel");
+import AgencyModel  from "./models/AgencyModel.js";
 
 
-class CreateAgencyController {
+export default class CreateAgencyController {
 
 
     async create(number, address){
@@ -32,7 +32,7 @@ class CreateAgencyController {
 
 
 
-module.exports = {
+/*module.exports = {
     CreateAgencyController,
 
-}
+}*/

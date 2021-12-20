@@ -1,4 +1,4 @@
-class RequestError extends Error{
+export class RequestError extends Error{
 
     constructor(message){
         super();
@@ -7,8 +7,4 @@ class RequestError extends Error{
         console.log('iniciou a class')
     }
 
-}
-
-module.exports = {
-    RequestError
 }

@@ -1,16 +1,20 @@
 console.log('heyyyyyy')
-var express = require('express');
-var cors = require('cors');
+//var express = require('express');
+import  express from 'express';
+//var cors = require('cors');
+import cors from 'cors'
 const app = express()
 
 app.use(cors())
 app.use(express.json())
 
-const knex = require('knex');
-const { response } = require('express');
-const { CreateAgencyController } = require('./controllers/CreateAgencyController');
-const { CreateCustomerController } = require('./controllers/CreateCustomerController');
-const { RequestError } = require('./utils/RequestError');
+import knex from 'knex';
+import response from 'express';
+//const { CreateAgencyController } = require('./controllers/CreateAgencyController');
+import CreateAgencyController from './controllers/CreateAgencyController.js'
+//const { CreateCustomerController } = require('./controllers/CreateCustomerController');
+import CreateCustomerController from './controllers/CreateCustomerController.js'
+import {RequestError} from './utils/RequestError.js';
 const connection = knex({
     client: 'mysql2',
     version: '5.7',
@@ -22,7 +26,8 @@ const connection = knex({
       password : 'bia2101',
       database : 'school'
     }
-  });
+});
+
 
 app.get('/', function (req, res) {
   console.log('oiii')
@@ -95,6 +100,8 @@ function validateAgency(reqBody){
 
 }
 
+
+//teste
 app.post('/api/customers', (req, res) => {
    const createCustomerController = new CreateCustomerController()
    createCustomerController.create(req.body.name, req.body.account)
