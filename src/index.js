@@ -16,6 +16,7 @@ import response from 'express';
 import CreateCustomerController from './controllers/CreateCustomerController.js'
 
 import { CreateAgencyControllerFactory } from './controllers/CreateAgencyController.factory.js';
+import { GetAgencyControllerFactory } from './controllers/GetAgencyController.factory.js';
 const connection = knex({
     client: 'mysql2',
     version: '5.7',
@@ -44,6 +45,15 @@ app.post('/api/agency', async (req, res) =>  {
 
     
 })
+
+app.get('/api/agency', async (req, res) =>  {
+   const result = await GetAgencyControllerFactory(req)
+
+   res.json(result)
+
+    
+})
+
 
 
 
