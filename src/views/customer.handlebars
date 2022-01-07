@@ -1,0 +1,105 @@
+<!--BACKEND HANDLEBARS-->
+<h1>Example App: Home</h1>
+
+ <p>{{foo}}</p>
+
+{{#if showTitle}} 
+    <h1>Titulo</h1>
+{{/if}}
+
+<div>
+   {{#each rg}}
+        <tr>
+            <td>{{name}}
+                <ul>
+                    {{#details}}
+                        <li>{{age}}</li>
+                        <li>{{from}}</li>
+                    {{/details}}
+                </ul>
+            </td>
+                
+        </tr>
+    {{/each}}
+   
+</div>
+
+<!--JS PURO-->
+<div>
+    <div id="name"></div>
+    <div id="age"></div>
+    <div id="money"></div>
+
+
+</div>
+
+<!--VUEJS-->
+<div id="list-rendering">
+    <ol>
+        <li v-for="bill in bills">
+            <div id="description"> \{{ bill.description}} </div>
+            <div id="value">\{{bill.value + ' reais'}}</div>
+            <div id="date">\{{bill.date}}</div>
+          
+        </li>
+    </ol>
+</div>
+
+
+
+
+<script src="https://unpkg.com/vue@next"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script>
+
+
+
+        const ListRendering = {
+            mounted(){
+                $.ajax({
+                    url: '/api/extract',
+                    method: 'GET',
+                    success: (res)=> {
+                        this.bills = res
+                       
+                    },
+                    error: (e) => {
+                        console.log('error')
+                        console.log(e)
+                    },
+                })
+            },
+            data() {
+                return {
+                    bills: []
+                   
+                }
+            }
+        }
+
+        Vue.createApp(ListRendering).mount('#list-rendering')
+    
+</script>
+
+<style>
+    #list-rendering{
+        background-color: black;
+    }
+    #description, #value, #date{
+        text-align: center;
+         margin:8px
+        
+    }
+    #description{
+        background-color: rgb(107, 41, 107);
+        color: white;
+        padding: 3px;
+       
+    }
+    #value{
+        color: yellow
+    }
+    #date{
+        color:chartreuse
+    }
+</style>

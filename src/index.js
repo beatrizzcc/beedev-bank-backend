@@ -7,6 +7,9 @@ const app = express()
 
 app.use(cors())
 app.use(express.json())
+app.engine('handlebars', engine());
+app.set('view engine', 'handlebars');
+app.set('views', './src/views');
 
 import knex from 'knex';
 import response from 'express';
@@ -17,6 +20,10 @@ import CreateCustomerController from './controllers/CreateCustomerController.js'
 
 import { CreateAgencyControllerFactory } from './controllers/CreateAgencyController.factory.js';
 import { GetAgencyControllerFactory } from './controllers/GetAgencyController.factory.js';
+import { engine } from 'express-handlebars';
+import jwt from "jsonwebtoken";
+
+const secretKey = 'my-super-hard-secret-key'
 const connection = knex({
     client: 'mysql2',
     version: '5.7',
@@ -36,7 +43,30 @@ app.get('/', function (req, res) {
   res.send('Hello World')
 })
 
-app.post('/api/agency', async (req, res) =>  {
+function middlewareAdmin(req, res, next){
+    //console.log('passou ')
+    let user = true;
+
+    let token = req.headers.authorization
+    //console.log('token.........')
+    //console.log(token)
+
+    
+    
+    try{
+        const validation = jwt.verify(token, secretKey)
+        next()
+
+    }catch(e){
+        res.statusCode = 401
+        res.send()
+
+    }
+}
+
+app.use('/admin', middlewareAdmin);
+
+app.post('/admin/api/agency', async (req, res) =>  {
     const result = await CreateAgencyControllerFactory(req)
    
     res.statusCode = result.statusCode
@@ -46,25 +76,97 @@ app.post('/api/agency', async (req, res) =>  {
     
 })
 
-app.get('/api/agency', async (req, res) =>  {
+app.get('/admin/api/agency', async (req, res) =>  {
    const result = await GetAgencyControllerFactory(req)
 
    res.json(result)
 
     
 })
-
-
-
-
-
 //teste
+
+app.get('/customer', (req, res) =>  {
+    res.render('customer', {
+        foo: 'BEEDEV 2',
+        showTitle: true,
+        rg: [
+            {name: 'Cassia', 
+            details: [
+                {age: 12, from: 'Brasil'},     
+            ]
+        
+            },
+            {name: 'Catarina', 
+            details: [
+                {age: 18, from: 'Australia'}
+            ]
+            }
+        ]
+    })
+   
+      
+})
+
 app.post('/api/customers', (req, res) => {
    const createCustomerController = new CreateCustomerController()
    createCustomerController.create(req.body.name, req.body.account)
 
    res.json({status: true})
 })
+
+app.post('/api/v1/auth-admin', (req, res) => {
+    let username = req.body.username
+    let password = req.body.password
+
+    if(!username || !password){
+        res.statusCode = 401
+        return res.send()
+    }
+
+    let validation = true
+    if(!validation){
+        res.statusCode = 401
+        return res.send()
+    }else{
+        let token = jwt.sign({ foo: username }, secretKey);
+        
+        res.send({
+            token
+        })
+    }
+})
+
+app.get('/api/customers', (req, res) =>  {
+    res.json({
+        
+        name: 'Beatriz',
+        age: 19,
+        money: 15.000
+    })
+      
+})
+
+app.get('/api/extract', (req, res) => {
+    res.json([
+        { description: 'Conta de Luz', value: 50.00, date: '2022-01-03 16:10' },
+        { description: 'Conta de Agua', value: 75.00, date: '2022-02-22 16:10' },
+        { description: 'Conta de Internet', value: 110.00, date: '2022-01-21 16:10' },
+       
+    ])
+})
+
+
+
+
+app.get('/example', (req, res) =>  {
+   res.render('example', {
+       foo: 'BEEDEV'
+   })
+     
+})
+
+
+
 
 
 
