@@ -20,15 +20,28 @@ export default class BaseModel {
         return this.database
               .select('*')
               .from(this.tableName)
+            
   
     }
 
-    
     create(data){
         return this.database()
           .table(this.tableName)
-          .insert(data)
+          .insert(data, 'id')
   
-      }
+    }
+    deleteId(id){
+      return this.database()
+        .table(this.tableName)
+        .where('id', id).delete()
+       
+    }
+
+    updateId(id){
+      return this.database()
+        .table(this.tableName)
+        .where({id: id}).update('pay_date', '2022-01-20')
+    }
+
 
 }

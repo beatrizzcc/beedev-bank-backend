@@ -37,13 +37,24 @@
 <div id="list-rendering">
     <ol>
         <li v-for="bill in bills">
+            <div id="description">{{bill.title}}</div>
+            <div id="value">{{bill.value}}</div>
+            <div></div>
+          
+        </li>
+    </ol>
+</div>
+
+<!--<div id="list-rendering">
+    <ol>
+        <li v-for="bill in bills">
             <div id="description"> \{{ bill.description}} </div>
             <div id="value">\{{bill.value + ' reais'}}</div>
             <div id="date">\{{bill.date}}</div>
           
         </li>
     </ol>
-</div>
+</div>-->
 
 
 
@@ -60,12 +71,16 @@
                     url: '/api/extract',
                     method: 'GET',
                     success: (res)=> {
+                        console.log(res)
+                        console.log('sucesso')
                         this.bills = res
-                       
+                        
                     },
                     error: (e) => {
                         console.log('error')
+                        
                         console.log(e)
+
                     },
                 })
             },
